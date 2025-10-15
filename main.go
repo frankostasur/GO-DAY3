@@ -1,27 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+)
 
 func main() {
-	var revenue float64
-	var expenses float64
-	var taxRate float64
+	revenue := getUserInput("Enter your revenue:")
+	expenses := getUserInput("Enter your expences:")
+	taxRate := getUserInput("Enter your taxRate:")
 
 
-	fmt.Print("Enter your revenue:")
-	fmt.Scan(&revenue)
-
-	fmt.Print("Enter your expences:")
-	fmt.Scan(&expenses)
-
-	fmt.Print("Enter your taxRate:")
-	fmt.Scan(&taxRate)
-
-	EBT := revenue - expenses
-	profit :=  EBT * (1-taxRate/100)
-	ratio := EBT/profit
+	EBT, profit, ratio :=calculatevalues(revenue, expenses, taxRate)
 
 	fmt.Println(EBT)
 	fmt.Println(profit)
 	fmt.Println(ratio)
+}
+func calculatevalues(revenue, expenses, taxRate float64) (float64 ,float64, float64){
+	EBT := revenue - expenses
+	profit :=  EBT * (1-taxRate/100)
+	ratio := EBT/profit
+	return EBT, profit ,ratio
+}
+func getUserInput(infoText string) float64{
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
+
 }
